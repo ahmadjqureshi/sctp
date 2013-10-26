@@ -1,0 +1,26 @@
+#C++ compiler
+CC = g++
+
+#C++ compiler flags
+CFLAGS = -Wall -g
+
+#Libraries
+LIBS = -L$(CURDIR) libnetwrapper.a
+
+OBJS = testclient.o
+
+EXENAME = -o clientprg
+
+clientprg : $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(EXENAME)
+
+testclient.o : netconnect.h \
+	netsendrecv.h \
+	testclient.cpp
+	@ $(CC) -c $(CFLAGS) netconnect.h netsendrecv.h testclient.cpp
+
+clean:
+	@echo "Cleaning removing all object files and executable."
+	-rm -rf $(OBJS)
+	-rm clientprg
+

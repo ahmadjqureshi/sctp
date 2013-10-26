@@ -1,0 +1,30 @@
+#C++ compiler
+CC = g++
+
+#Archive
+CARCHIVE = ar rc
+
+OBJS = listener.o netsendrecv.o netconnect.o
+
+ARNAME = libnetwrapper.a
+
+serverprg : $(OBJS)
+	$(CARCHIVE) $(ARNAME) $(OBJS)
+
+listener.o : netexceptions.h \
+	listener.h \
+	listener.cpp
+	@ $(CC) -c $(CFLAGS) netexceptions.h listener.h listener.cpp
+
+netsendrecv.o : netsendrecv.h \
+		netsendrecv.cpp
+	@ $(CC) -c $(CFLAGS) netsendrecv.h netsendrecv.cpp
+
+netconnect.o : netconnect.h \
+	netconnect.cpp
+	@ $(CC) -c $(CFLAGS) netconnect.h netconnect.cpp
+
+clean:
+	@echo "Cleaning removing all object files and executable."
+	-rm -rf $(OBJS)
+	-rm libnetwrapper.a
