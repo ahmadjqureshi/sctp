@@ -10,7 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
+- script: cd sctpnetwrap_onetoone;make -f nlib.mkf
   displayName: 'Run a one-line script'
 
 - script: |
